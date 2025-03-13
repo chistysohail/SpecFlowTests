@@ -9,9 +9,8 @@ namespace SpecFlowTests.TestContext
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Task> Tasks { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public TestDbContext(DbContextOptions<TestDbContext> options) : base(options)
         {
-            optionsBuilder.UseInMemoryDatabase("TestDatabase");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

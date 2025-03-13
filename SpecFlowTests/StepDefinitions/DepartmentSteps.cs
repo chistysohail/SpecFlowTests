@@ -10,12 +10,16 @@ namespace SpecFlowTests.StepDefinitions
     [Binding]
     public class DepartmentSteps
     {
-        private TestDbContext _context;
+        private readonly TestDbContext _context;
         private Department _retrievedDepartment;
 
         public DepartmentSteps()
         {
-            _context = new TestDbContext();
+            var options = new DbContextOptionsBuilder<TestDbContext>()
+                .UseInMemoryDatabase("TestDatabase")
+                .Options;
+
+            _context = new TestDbContext(options);
         }
 
         [Given(@"the following departments exist:")]
